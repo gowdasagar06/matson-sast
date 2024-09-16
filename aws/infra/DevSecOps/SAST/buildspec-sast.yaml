@@ -46,8 +46,8 @@ phases:
     commands:
       -   echo "SAST/SCA phases completed"
       -   echo "Post-build phase started"
-      -   cp target/ohana-api-0.0.1-SNAPSHOT.war .
-      -   mv ohana-api-0.0.1-SNAPSHOT.war ohana-api.war
+      -   cp target/hello-world-1.0.2-SNAPSHOT.war .
+      -   mv hello-world-1.0.2-SNAPSHOT.war hello-world.war
       -   mkdir build_artifacts
       -   cp ohana-api.war buildspec-lab.yml buildspec-dev.yml buildspec-pp.yml buildspec-prod.yml appspec.yml application_stop_start.sh build_artifacts/
 
