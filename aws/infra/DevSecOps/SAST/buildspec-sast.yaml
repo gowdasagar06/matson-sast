@@ -49,7 +49,7 @@ phases:
       -   cp target/hello-world-1.0.2.war .
       -   mv hello-world-1.0.2.war hello-world.war
       -   mkdir build_artifacts
-      -   cp hello-world.war buildspec-lab.yml buildspec-dev.yml buildspec-pp.yml buildspec-prod.yml appspec.yml application_stop_start.sh build_artifacts/
+      -   cp hello-world.war buildspec-lab.yml buildspec-pp.yml appspec.yml application_start.sh build_artifacts/
 
 artifacts:
   files:
