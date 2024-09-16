@@ -39,7 +39,7 @@ phases:
           mvn clean install -s settings.xml
           echo "Build Completed"
           echo "Publishing artifact to CodeArtifact"
-          mvn deploy -s settings.xml
+          # mvn deploy -s settings.xml
           ls
         fi
   post_build:
