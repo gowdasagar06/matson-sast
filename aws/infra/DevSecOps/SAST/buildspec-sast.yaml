@@ -19,10 +19,10 @@ phases:
       # - export DO_STATIC_SCAN=#{variables.doStaticScan}
       # - export DO_ID=#{codepipeline.PipelineExecutionId}
       - echo ${doStaticScan}
-      - echo #{codepipeline.PipelineExecutionId}
+  
       - |
         # Convert environment variable to lowercase for comparison
-        if [ "$(echo $DO_STATIC_SCAN | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
+        if [ "$(echo $doStaticScan | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
           echo "Starting SAST and SCA with Coverity"
           # Uncomment and use these lines if needed
           # export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain matson --domain-owner 196787314311 --region us-west-2 --query authorizationToken --output text)
