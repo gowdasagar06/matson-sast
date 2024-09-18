@@ -16,7 +16,7 @@ phases:
 
   build:
     commands:
-      - export DO_STATIC_SCAN=#{variables.doStaticScan}
+      - export DO_STATIC_SCAN=$doStaicScan
       # - export DO_ID=#{codepipeline.PipelineExecutionId}
       - echo "${DO_STATIC_SCAN}"
   
