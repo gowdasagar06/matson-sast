@@ -18,7 +18,7 @@ phases:
     commands:
       # - export DO_STATIC_SCAN=#{variables.doStaticScan}
       # - export DO_ID=#{codepipeline.PipelineExecutionId}
-      - echo ${doStaticScan}
+      - echo "${doStaticScan}"
   
       - |
         # Convert environment variable to lowercase for comparison
