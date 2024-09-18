@@ -13,12 +13,14 @@ phases:
       # Uncomment and use these lines if needed
       # - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain matson --domain-owner 196787314311 --region us-west-2 --query authorizationToken --output text)
       # - export doStaticScan=$(aws ssm get-parameter --name /pipeline/doStaticScan --query Parameter.Value --output text)
+      - export DO_STATIC_SCAN=#{variables.doStaticScan}
+      - echo $DO_STATIC_SCAN
 
   build:
     commands:
       - |
         # Convert environment variable to lowercase for comparison
-        if [ "$(echo $doStaticScan | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
+        if [ "$(echo $DO_STATIC_SCAN | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
           echo "Starting SAST and SCA with Coverity"
           # Uncomment and use these lines if needed
           # export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain matson --domain-owner 196787314311 --region us-west-2 --query authorizationToken --output text)
@@ -36,25 +38,25 @@ phases:
         else
           echo "Skipping SAST/SCA and proceeding with build"
           echo "Source artifact reference: $CODEBUILD_SOURCE_VERSION"
-          echo "Build started"
-          cp -r aws/infra/codepipeline/* Ohana-Springboot/
-          cd Ohana-Springboot
-          mvn clean install -s settings.xml
-          echo "Build Completed"
-          echo "Publishing artifact to CodeArtifact"
+          # echo "Build started"
+          # cp -r aws/infra/codepipeline/* Ohana-Springboot/
+          # cd Ohana-Springboot
+          # mvn clean install -s settings.xml
+          # echo "Build Completed"
+          # echo "Publishing artifact to CodeArtifact"
           ls
         fi
 
-  post_build:
-    commands:
-      - echo "SAST/SCA phases completed"
-      - echo "Post-build phase started"
-      - cp target/hello-world-1.0.2.war .
-      - mv hello-world-1.0.2.war hello-world.war
-      - mkdir build_artifacts
-      - cp hello-world.war buildspec-lab.yml buildspec-pp.yml appspec.yml application_start.sh build_artifacts/
+#   post_build:
+#     commands:
+#       - echo "SAST/SCA phases completed"
+#       - echo "Post-build phase started"
+#       - cp target/hello-world-1.0.2.war .
+#       - mv hello-world-1.0.2.war hello-world.war
+#       - mkdir build_artifacts
+#       - cp hello-world.war buildspec-lab.yml buildspec-pp.yml appspec.yml application_start.sh build_artifacts/
 
-artifacts:
-  files:
-    - '**/build_artifacts/*'
-  discard-paths: yes
+# artifacts:
+#   files:
+#     - '**/build_artifacts/*'
+#   discard-paths: yes
