@@ -30,7 +30,7 @@ phases:
           # sed -i 's/build-command: "echo '\''Skipping build command'\''"/build-command: "mvn deploy -s settings.xml"/' coverity.yaml
           # cat coverity.yaml
           # /tmp/synopsys-bridge --verbose --stage polaris --input inputFile.json
-          echo "SAST and SCA phases completed"
+          # echo "SAST and SCA phases completed"
         else
           echo "Skipping SAST/SCA and proceeding with build"
           echo "Source artifact reference: $CODEBUILD_SOURCE_VERSION"
