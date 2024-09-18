@@ -17,7 +17,7 @@ phases:
   build:
     commands:
       - |
-        if [ "$doStaticScan" = "Yes" ]; then
+         if [ "$(echo #{variables.doStaticScan} | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
           echo "Starting SAST and SCA with Coverity"
           export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain matson --domain-owner 196787314311 --region us-west-2 --query authorizationToken --output text)
           polaris_token="/ohana-api/polaris-synopsys-token"
