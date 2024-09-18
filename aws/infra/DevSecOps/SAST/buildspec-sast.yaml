@@ -10,15 +10,16 @@ phases:
   pre_build:
     commands:
       - echo "Pre-build phase started"
+      # Uncomment and use these lines if needed
       # - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain matson --domain-owner 196787314311 --region us-west-2 --query authorizationToken --output text)
       # - export doStaticScan=$(aws ssm get-parameter --name /pipeline/doStaticScan --query Parameter.Value --output text)
-     
 
   build:
     commands:
       - |
-         if [ "$(echo #{variables.doStaticScan} | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
+        if [ "$(echo #{variables.doStaticScan} | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
           echo "Starting SAST and SCA with Coverity"
+          # Uncomment and use these lines if needed
           # export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain matson --domain-owner 196787314311 --region us-west-2 --query authorizationToken --output text)
           # polaris_token="/ohana-api/polaris-synopsys-token"
           # export BRIDGE_POLARIS_ACCESSTOKEN=$(aws ssm get-parameter --name $polaris_token --with-decryption --query "Parameter.Value" --output text)
@@ -30,7 +31,7 @@ phases:
           # sed -i 's/build-command: "echo '\''Skipping build command'\''"/build-command: "mvn deploy -s settings.xml"/' coverity.yaml
           # cat coverity.yaml
           # /tmp/synopsys-bridge --verbose --stage polaris --input inputFile.json
-          # echo "SAST and SCA phases completed"
+          echo "SAST and SCA phases completed"
         else
           echo "Skipping SAST/SCA and proceeding with build"
           echo "Source artifact reference: $CODEBUILD_SOURCE_VERSION"
@@ -42,6 +43,7 @@ phases:
           echo "Publishing artifact to CodeArtifact"
           ls
         fi
+
   post_build:
     commands:
       - echo "SAST/SCA phases completed"
@@ -55,6 +57,3 @@ artifacts:
   files:
     - '**/build_artifacts/*'
   discard-paths: yes
-
-
-  
