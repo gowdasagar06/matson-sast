@@ -20,6 +20,7 @@ phases:
       # - cd Automation_scan/bin 
       # - python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID 
       - export DO_DYNAMIC_SCAN=$doDASTScan
+      - echo "${DO_DYNAMIC_SCAN}"
       - |
        if [ "$(echo $DO_DYNAMIC_SCAN | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
        # echo "Source artifact reference:$CODEBUILD_SOURCE_VERSION"
