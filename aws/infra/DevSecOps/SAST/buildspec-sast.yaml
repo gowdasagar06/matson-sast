@@ -16,10 +16,10 @@ phases:
 
   build:
     commands:
+      - echo "{$doStaticScan}"
       - export DO_STATIC_SCAN=$doStaticScan
-      # - export DO_ID=#{codepipeline.PipelineExecutionId}
+     
       - echo "${DO_STATIC_SCAN}"
-  
       - |
         # Convert environment variable to lowercase for comparison
         if [ "$(echo $DO_STATIC_SCAN | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
