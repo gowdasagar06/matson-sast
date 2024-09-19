@@ -15,17 +15,19 @@ phases:
 
   build:
     commands:
+    
       # - cp -r aws/infra/DevSecOps/DAST/* .
       # - cd Automation_scan/bin 
       # - python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID 
+      - export DO_DYNAMIC_SCAN=$doDASTScan
       - |
-       if [ "$doDASTScan" = "Yes" ]; then
-       echo "Source artifact reference:$CODEBUILD_SOURCE_VERSION"
-       echo "automation for DAST Phase"
-       cp -r aws/infra/DevSecOps/DAST/* .
+       if [ "$(echo $DO_DYNAMIC_SCAN | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
+       # echo "Source artifact reference:$CODEBUILD_SOURCE_VERSION"
+       # echo "automation for DAST Phase"
+       # cp -r aws/infra/DevSecOps/DAST/* .
        echo "Running DAST Scan..."
-       cd Automation_scan/bin 
-       python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID 
+       # cd Automation_scan/bin 
+       # python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID 
        else
        echo "Skipping DAST and proceeding with Deploy"
        fi
